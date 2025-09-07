@@ -1,0 +1,33 @@
+{
+  "name": "taof-vcb-demo",
+  "version": "1.0.0",
+  "private": true,
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "doctor": "npx expo-doctor"
+  },
+  "dependencies": {
+    "@expo/metro-runtime": "~5.0.4",
+    "@react-native-picker/picker": "2.11.1",
+    "@react-navigation/native": "^7.1.17",
+    "@react-navigation/native-stack": "^7.3.26",
+    "expo": "53.0.22",
+    "expo-device": "~7.1.4",
+    "expo-linear-gradient": "~14.1.5",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-native": "0.79.5",
+    "react-native-gesture-handler": "~2.24.0",
+    "react-native-safe-area-context": "5.4.0",
+    "react-native-screens": "~4.11.1",
+    "react-native-web": "0.20.0",
+    "expo-font": "~13.3.2",
+    "expo-local-authentication": "~16.0.5",
+    "react-native-svg": "15.11.2",
+    "expo-notifications": "~0.31.4"
+  }
+}

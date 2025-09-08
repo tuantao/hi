@@ -1,3 +1,14 @@
 node_modules/
 ios/
 android/
+node_modules/
+.expo/
+__pycache__/
+node_modules/
+.expo/
+__pycache__/
+ios/Pods/
+ios/build/
+android/.gradle/
+android/app/build/
+.DS_Store

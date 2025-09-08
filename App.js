@@ -1,48 +1,3 @@
-// === Helper: Chuyển đổi Tiếng Việt có dấu sang ASCII Telex (PHIÊN BẢN SỬA LỖI) ===
-const toTelexASCII = (input = '') => {
-  // 1. Ánh xạ các ký tự đặc biệt và ký tự có dấu thanh
-  // Đây là cách an toàn nhất, tránh các lỗi logic phức tạp.
-  const map = {
-      // Digraphs (nguyên âm đôi)
-      'ă': 'aw', 'â': 'aa', 'ê': 'ee', 'ô': 'oo', 'ơ': 'ow', 'ư': 'uw',
-      'Ă': 'Aw', 'Â': 'Aa', 'Ê': 'Ee', 'Ô': 'Oo', 'Ơ': 'Ow', 'Ư': 'Uw',
-      'đ': 'dd', 'Đ': 'Dd',
-      // Tones (dấu thanh)
-      'á': 'as', 'à': 'af', 'ả': 'ar', 'ã': 'ax', 'ạ': 'aj',
-      'Á': 'As', 'À': 'Af', 'Ả': 'Ar', 'Ã': 'Ax', 'Ạ': 'Aj',
-      'ắ': 'aws', 'ằ': 'awf', 'ẳ': 'awr', 'ẵ': 'awx', 'ặ': 'awj',
-      'Ắ': 'Aws', 'Ằ': 'Awf', 'Ẳ': 'Awr', 'Ẵ': 'Awx', 'Ặ': 'Awj',
-      'ấ': 'aas', 'ầ': 'aaf', 'ẩ': 'aar', 'ẫ': 'aax', 'ậ': 'aaj',
-      'Ấ': 'Aas', 'Ầ': 'Aaf', 'Ẩ': 'Aar', 'Ẫ': 'Aax', 'Ậ': 'Aaj',
-      'é': 'es', 'è': 'ef', 'ẻ': 'er', 'ẽ': 'ex', 'ẹ': 'ej',
-      'É': 'Es', 'È': 'Ef', 'Ẻ': 'Er', 'Ẽ': 'Ex', 'Ẹ': 'Ej',
-      'ế': 'ees', 'ề': 'eef', 'ể': 'eer', 'ễ': 'eex', 'ệ': 'eej',
-      'Ế': 'Ees', 'Ề': 'Eef', 'Ể': 'Eer', 'Ễ': 'Eex', 'Ệ': 'Eej',
-      'í': 'is', 'ì': 'if', 'ỉ': 'ir', 'ĩ': 'ix', 'ị': 'ij',
-      'Í': 'Is', 'Ì': 'If', 'Ỉ': 'Ir', 'Ĩ': 'Ix', 'Ị': 'Ij',
-      'ó': 'os', 'ò': 'of', 'ỏ': 'or', 'õ': 'ox', 'ọ': 'oj',
-      'Ó': 'Os', 'Ò': 'Of', 'Ỏ': 'Or', 'Õ': 'Ox', 'Ọ': 'Oj',
-      'ố': 'oos', 'ồ': 'oof', 'ổ': 'oor', 'ỗ': 'oox', 'ộ': 'ooj',
-      'Ố': 'Oos', 'Ồ': 'Oof', 'Ổ': 'Oor', 'Ỗ': 'Oox', 'Ộ': 'Ooj',
-      'ớ': 'ows', 'ờ': 'owf', 'ở': 'owr', 'ỡ': 'owx', 'ợ': 'owj',
-      'Ớ': 'Ows', 'Ờ': 'Owf', 'Ở': 'Owr', 'Ỡ': 'Owx', 'Ợ': 'Owj',
-      'ú': 'us', 'ù': 'uf', 'ủ': 'ur', 'ũ': 'ux', 'ụ': 'uj',
-      'Ú': 'Us', 'Ù': 'Uf', 'Ủ': 'Ur', 'Ũ': 'Ux', 'Ụ': 'Uj',
-      'ứ': 'uws', 'ừ': 'uwf', 'ử': 'uwr', 'ữ': 'uwx', 'ự': 'uwj',
-      'Ứ': 'Uws', 'Ừ': 'Uwf', 'Ử': 'Uwr', 'Ữ': 'Uwx', 'Ự': 'Uwj',
-      'ý': 'ys', 'ỳ': 'yf', 'ỷ': 'yr', 'ỹ': 'yx', 'ỵ': 'yj',
-      'Ý': 'Ys', 'Ỳ': 'Yf', 'Ỷ': 'Yr', 'Ỹ': 'Yx', 'Ỵ': 'Yj'
-  };
-
-  // 2. Lặp qua từng ký tự của chuỗi đầu vào và thay thế nếu có trong map
-  let result = '';
-  for (const char of String(input)) {
-      result += map[char] || char;
-  }
-  return result;
-};
-
-
 // App.js (FULL) — PHIÊN BẢN HOÀN THIỆN: Gửi thông báo hệ thống thật
 // - Font: Manrope-800/400/500/600
 // - Đảm bảo bạn đã tải và chép bộ logo mới vào thư mục /assets/logos
@@ -85,7 +40,7 @@ import BottomContinue from './assets/bottom-continue.png';
 import BottomOverlay from './assets/bottom-overlay.png';
 import HeaderTransfer from './assets/header-transfer.png';
 import BgConfirm from './assets/bg-login-5.jpg';
-import HeaderConfirm from './assets/header-transfer-2.png'; 
+import HeaderConfirm from './assets/header-transfer-2.png';
 import BottomConfirm from './assets/bottom-continue-2.png';
 import BgSuccess from './assets/success.jpg';
 import BottomOverlaySuccess from './assets/overlay-end.png';
@@ -96,10 +51,13 @@ const Stack = createNativeStackNavigator();
 const G1 = '#33cc66';
 const G2 = '#009245';
 const { width: SW, height: SH } = Dimensions.get('window');
-const FONT_HEAVY = 'Manrope-800';
-const FONT_REG   = 'Manrope-400';
-const FONT_MEDIUM = 'Manrope-500';
-const FONT_SEMI = 'Manrope-600';
+const FONT_HEAVY      = 'Manrope-800'; // Đậm nhất
+const FONT_BOLD       = 'Manrope-700';
+const FONT_SEMI       = 'Manrope-600';
+const FONT_MEDIUM     = 'Manrope-500';
+const FONT_REG        = 'Manrope-400'; // Thông thường
+const FONT_LIGHT      = 'Manrope-300';
+const FONT_EXTRALIGHT = 'Manrope-200'; // Nhạt nhất
 /* ================== VỊ TRÍ / OFFSET DỄ CHỈNH SỬA ================== */
 // === HOME SCREEN ===
 const HOME_LAYOUT = {
@@ -174,34 +132,6 @@ const formatVNCurrency = (n) => {
   return num.toLocaleString('vi-VN').replace(/\./g, ',');
 };
 
-// SỬA LỖI: Thêm hàm định dạng ngày giờ bị thiếu mà màn hình Success đang gọi.
-const fmtVNDateTime = (date) => {
-  if (!date || !(date instanceof Date)) return '';
-  const pad = (n) => String(n).padStart(2, '0');
-  const hours = pad(date.getHours());
-  const minutes = pad(date.getMinutes());
-  const day = pad(date.getDate());
-  const month = pad(date.getMonth() + 1);
-  const year = date.getFullYear();
-  return `${hours}:${minutes} ${day}/${month}/${year}`;
-};
-
-
-// SỬA LỖI: Đã xóa một loạt các hàm helper bị trùng lặp, bị lỗi và chưa hoàn thiện ở đây.
-// Chỉ giữ lại hàm `toTelexASCII` chuẩn ở đầu tệp.
-
-
-/* ===== Input Normalization: remove Vietnamese diacritics and keep telex keys as literal ===== */
-const normalizeInput = (str) => {
-  if (str == null) return '';
-  return String(str)
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/đ/g, 'd')
-    .replace(/Đ/g, 'D');
-};
-
-
 
 /* =========================================================
    APP
@@ -217,10 +147,13 @@ export default function App() {
     (async () => {
       try {
         await Font.loadAsync({
-          'Manrope-800': require('./assets/fonts/Manrope-ExtraBold.ttf'),
-          'Manrope-400': require('./assets/fonts/Manrope-Regular.ttf'),
-          'Manrope-500': require('./assets/fonts/Manrope-Medium.ttf'),
-          'Manrope-600': require('./assets/fonts/Manrope-SemiBold.ttf'),
+          'Manrope-800': require('./assets/fonts/Manrope-ExtraBold.ttf'),   //
+          'Manrope-700': require('./assets/fonts/Manrope-Bold.ttf'),         //
+          'Manrope-600': require('./assets/fonts/Manrope-SemiBold.ttf'),     //
+          'Manrope-500': require('./assets/fonts/Manrope-Medium.ttf'),       //
+          'Manrope-400': require('./assets/fonts/Manrope-Regular.ttf'),      //
+          'Manrope-300': require('./assets/fonts/Manrope-Light.ttf'),        //
+          'Manrope-200': require('./assets/fonts/Manrope-ExtraLight.ttf'),   //
         });
       } finally {
         setFontsReady(true);
@@ -246,7 +179,7 @@ export default function App() {
         <Stack.Screen name="Home">{props => <Home {...props} username={username} accountNo={accountNo} balance={balance} setUsername={setUsername} setAccountNo={setAccountNo} setBalance={setBalance} />}</Stack.Screen>
         <Stack.Screen name="Transfer">{props => <Transfer {...props} username={username} srcAcc={accountNo} balance={balance} phone={phone} />}</Stack.Screen>
         <Stack.Screen name="Confirm" component={Confirm} />
-        <Stack.Screen name="Success" component={Success} /> 
+        <Stack.Screen name="Success" component={Success} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -355,115 +288,43 @@ function LoginStep1({ navigation, phone, setPhone }) {
 }
 
 /* =========================================================
-   LOGIN STEP 2 — PHIÊN BẢN CHUẨN CHO iOS
+   LOGIN STEP 2
 ========================================================= */
 function LoginStep2({ navigation, username }) {
   const [password, setPassword] = useState('');
   const [showPwd, setShowPwd] = useState(false);
-  const [failCount, setFailCount] = useState(0);
-  const [showNoti, setShowNoti] = useState(false);
-  const [notiMsg, setNotiMsg] = useState('');
-
   const HELLO_TOP = SH * 0.485;
   const BLOCK_TOP = SH * 0.535;
-
-  const isValidPassword = (pwd) => /^Taof.{4,}$/.test(pwd);
-
-  const handleLogin = () => {
-    if (!isValidPassword(password)) {
-      setFailCount((n) => {
-        const next = n + 1;
-        const message = next >= 5
-          ? "Quý khách đã nhập sai thông tin truy cập 5 lần liên tiếp. Dịch vụ VCB Digibank sẽ bị TẠM KHÓA. Vui lòng thực hiện cấp lại mật khẩu hoặc đến các điểm giao dịch của VCB để được hỗ trợ."
-          : `Quý khách đã nhập sai thông tin truy cập ${next} lần liên tiếp. Dịch vụ sẽ bị TẠM KHÓA nếu nhập sai 5 lần.`;
-        setNotiMsg(message);
-        setShowNoti(true);
-        return next;
-      });
-      return;
-    }
-    setFailCount(0);
-    navigation.reset({ index: 0, routes: [{ name: 'Home' }] });
-  };
-
   async function authenticate() {
     const compatible = await LocalAuthentication.hasHardwareAsync();
     if (!compatible) return Alert.alert("Thiết bị không hỗ trợ Face ID/Touch ID");
     const enrolled = await LocalAuthentication.isEnrolledAsync();
     if (!enrolled) return Alert.alert("Chưa cài Face ID/Touch ID trong cài đặt");
-    const result = await LocalAuthentication.authenticateAsync({
-      promptMessage: "Đăng nhập bằng Face ID",
-      fallbackLabel: "Nhập mật khẩu",
-      disableDeviceFallback: false
-    });
-    if (result.success) navigation.replace('Home');
+    const result = await LocalAuthentication.authenticateAsync({ promptMessage: "Đăng nhập bằng Face ID", fallbackLabel: "Nhập mật khẩu", disableDeviceFallback: false });
+    if (result.success) navigation.replace('Home'); else Alert.alert("Xác thực thất bại");
   }
-
   return (
     <View style={{ flex: 1, backgroundColor: '#000' }}>
       <StatusBar translucent backgroundColor="transparent" barStyle="light-content" />
       <ImageBackground source={BgLogin2} style={StyleSheet.absoluteFillObject} resizeMode="cover" />
-
-      <View style={{ position: 'absolute', top: HELLO_TOP, left: 135, right: 16 }}>
-        <Text style={{ color: '#fff', fontSize: 16 }}>
-          Xin chào, <Text style={{ fontFamily: FONT_HEAVY }}>{username}</Text>
-        </Text>
-      </View>
-
+      <View style={{ position: 'absolute', top: HELLO_TOP, left: 135, right: 16 }}><Text style={{ color: '#fff', fontSize: 16 }}>Xin chào, <Text style={{ fontFamily: FONT_HEAVY }}>{username}</Text></Text></View>
       <View style={{ position: 'absolute', left: 25, right: 25, top: BLOCK_TOP }}>
-        <View style={styles.pwdRow}>
-          <Ionicons name="lock-closed-outline" size={20} color="#222" style={{ marginRight: 8 }} />
-          <TextInput
-            style={styles.pwdInput}
-            value={password}
-            // 1. KHÔNG can thiệp bằng JavaScript
-            onChangeText={setPassword}
-            
-            placeholder="Mật khẩu"
-            secureTextEntry={!showPwd}
-            
-            // 2. Cung cấp đầy đủ các thuộc tính tiêu chuẩn. iOS sẽ tuân thủ nghiêm ngặt.
-            textContentType="password"
-            keyboardType="visible-password"
-            autoCorrect={false}
-            autoCapitalize="none"
-            spellCheck={false}
-            
-            // --- Các thuộc tính khác ---
-            placeholderTextColor="rgba(0,0,0,0.35)"
-            returnKeyType="done"
-            onSubmitEditing={handleLogin}
-            smartDashesType="no"
-            smartQuotesType="no"
-          />
-          <TouchableOpacity onPress={() => setShowPwd(v => !v)} style={{ padding: 6 }}>
-            <Ionicons name={showPwd ? "eye-off-outline" : "eye-outline"} size={20} color="#444" />
-          </TouchableOpacity>
-        </View>
-
-        <TouchableOpacity activeOpacity={1} onPress={handleLogin} style={{ marginTop: 15, marginLeft: 1 }}>
-          <LinearGradient colors={[G1, G2]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={[styles.loginBtn, { width: 290 }]}>
-            <Text style={styles.loginBtnText}>Đăng nhập</Text>
-          </LinearGradient>
-        </TouchableOpacity>
+        <View style={styles.pwdRow}><Ionicons name="lock-closed-outline" size={20} color="#222" style={{ marginRight: 8 }} /><TextInput style={styles.pwdInput} value={password} onChangeText={setPassword} placeholder="Mật khẩu" secureTextEntry={!showPwd} placeholderTextColor="rgba(0,0,0,0.35)" /><TouchableOpacity onPress={() => setShowPwd(v => !v)} style={{ padding: 6 }}><Ionicons name={showPwd ? "eye-off-outline" : "eye-outline"} size={20} color="#444" /></TouchableOpacity></View>
+        <TouchableOpacity activeOpacity={1} onPress={() =>
+  navigation.reset({
+    index: 1,
+    routes: [
+      { name: 'Login2' },
+      { name: 'Home' }
+    ],
+  })
+} style={{ marginTop: 15, marginLeft: 1 }}><LinearGradient colors={[G1, G2]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={[styles.loginBtn, { width: 290 }]}><Text style={styles.loginBtnText}>Đăng nhập</Text></LinearGradient></TouchableOpacity>
       </View>
-
-      <Modal visible={showNoti} transparent animationType="fade" onRequestClose={() => setShowNoti(false)}>
-        <View style={{ flex:1, backgroundColor:'rgba(0,0,0,0.45)', alignItems:'center', justifyContent:'center' }}>
-          <View style={{ width:'88%', backgroundColor:'#fff', borderRadius:16, padding:20, alignItems:'center' }}>
-            <Image source={require('./assets/noti.png')} style={{ width:64, height:64, marginBottom:12 }} resizeMode="contain" />
-            <Text style={{ fontSize:15, color:'#333', textAlign:'center', lineHeight:22, marginBottom:20 }}>
-              {notiMsg}
-            </Text>
-            <TouchableOpacity onPress={() => setShowNoti(false)} style={{ backgroundColor:'#009245', paddingHorizontal:28, paddingVertical:12, borderRadius:8 }}>
-              <Text style={{ color:'#fff', fontFamily: FONT_HEAVY }}>Đóng</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+      <TouchableOpacity onPress={authenticate} style={{ position: 'absolute', top: BLOCK_TOP + 64, left: 323, width: 48, height: 48, alignItems: 'center', justifyContent: 'center', zIndex: 9999 }} />
     </View>
   );
 }
+
 /* =========================================================
    HOME
 ========================================================= */
@@ -588,7 +449,7 @@ function Home({ navigation, username, accountNo, balance, setUsername, setAccoun
               <View style={modalStyles.sheet}>
                 <Text style={modalStyles.title}>Cài đặt tài khoản</Text>
                 <Text style={modalStyles.label}>Họ tên</Text>
-                <TextInput value={tmpName} onChangeText={(t) => setTmpName(normalizeInput(t).toUpperCase())} placeholder="Nhập họ tên" style={modalStyles.input} />
+                <TextInput value={tmpName} onChangeText={t => setTmpName(t.toUpperCase())} placeholder="Nhập họ tên" style={modalStyles.input} />
                 <Text style={modalStyles.label}>Số tài khoản</Text>
                 <TextInput value={tmpAcc} onChangeText={t => setTmpAcc(t.replace(/\D/g,''))} placeholder="Nhập số tài khoản" keyboardType="number-pad" style={modalStyles.input} />
                 <Text style={modalStyles.label}>Số tiền (VND)</Text>
@@ -647,122 +508,115 @@ function Transfer({ navigation, username, srcAcc, balance, phone }) {
   const [selectedPurpose, setSelectedPurpose] = useState('');
   const [activeMainCategory, setActiveMainCategory] = useState(SPENDING_CATEGORIES[0].main);
 
-  // Modal không đủ số dư
-  const [insuffModal, setInsuffModal] = useState(false);
-
-  const BANKS = useMemo(() => ([
-    { code: 'ABBANK', name: 'ABBANK', sub: 'Ngân hàng An Bình', logo: require('./assets/logos/ABBANK.png') },
-    { code: 'ACB', name: 'ACB', sub: 'Ngân hàng Á Châu', logo: require('./assets/logos/ACB.png') },
-    { code: 'AGRIBANK', name: 'AGRIBANK', sub: 'Ngân hàng Nông nghiệp và phát triển nông thôn Việt Nam', logo: require('./assets/logos/AGRIBANK.png') },
-    { code: 'ANZ', name: 'ANZ', sub: 'Ngân hàng TNHH Một Thành Viên ANZ Việt Nam', logo: require('./assets/logo.png') },
-    { code: 'BAC A BANK', name: 'BAC A BANK', sub: 'Ngân hàng Bắc Á', logo: require('./assets/logos/BACABANK.png') },
-    { code: 'BANGKOK BANK', name: 'BANGKOK BANK', sub: 'Ngân hàng Bangkok Bank - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
-    { code: 'BANGKOK BANK HN', name: 'BANGKOK BANK', sub: 'Ngân hàng Bangkok Bank - CN Hà Nội', logo: require('./assets/logo.png') },
-    { code: 'BAO VIET BANK', name: 'BAO VIET BANK', sub: 'Ngân hàng Bảo Việt', logo: require('./assets/logos/BAOVIETBANK.png') },
-    { code: 'BIDV', name: 'BIDV', sub: 'Ngân hàng Đầu tư và phát triển Việt Nam', logo: require('./assets/logos/BIDV.png') },
-    { code: 'BIDC HCM', name: 'BIDC', sub: 'Đầu Tư và Phát Triển Campuchia - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
-    { code: 'BIDC HN', name: 'BIDC', sub: 'Đầu Tư và Phát Triển Campuchia - CN Hà Nội', logo: require('./assets/logo.png') },
-    { code: 'BOI', name: 'BOI - BANK OF INDIA', sub: 'Ngân hàng Bank of India', logo: require('./assets/logo.png') },
-    { code: 'BSP', name: 'BSP', sub: 'Ngân hàng SINOPAC', logo: require('./assets/logo.png')},
-    { code: 'BNP PARIBAS HCM', name: 'BNP PARIBAS HCM', sub: 'Ngân hàng BNP Paribas - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
-    { code: 'BNP PARIBAS HN', name: 'BNP PARIBAS HN', sub: 'Ngân hàng BNP Paribas - CN Hà Nội', logo: require('./assets/logo.png') },
-    { code: 'BVBANK', name: 'BVBank', sub: 'Ngân hàng Bản Việt', logo: require('./assets/logos/BVBANK.png') },
-    { code: 'BVBANKTIMO', name: 'BVBANK TIMO', sub: 'Ngân hàng số Timo - Ngân hàng TMCP Bản Việt', logo: require('./assets/logos/BVBANKTIMO.png') },
-    { code: 'CAKE', name: 'CAKE', sub: 'Ngân hàng CAKE BY VPBANK', logo: require('./assets/logos/CAKE.png') },
-    { code: 'VCBNEO', name: 'VCBNeo', sub: 'Ngân hàng TM TNHH Một Thành Viên Ngoại thương Công nghệ số', logo: require('./assets/logos/VCBNEO.png') },
-    { code: 'CCB', name: 'CCB', sub: 'Ngân hàng Xây dựng Trung Quốc', logo: require('./assets/logo.png') },
-    { code: 'CIMB', name: 'CIMB', sub: 'Ngân hàng TNHH MTV CIMB Việt Nam', logo: require('./assets/logos/CIMB.png') },
-    { code: 'CITIBANK HN', name: 'CITIBANK', sub: 'Ngân hàng Citibank Việt Nam - CN Hà Nội', logo: require('./assets/logos/CITYBANK.png') },
-    { code: 'CITIBANK', name: 'CITIBANK', sub: 'Ngân hàng Citibank Việt Nam', logo: require('./assets/logos/CITYBANK.png') },
-    { code: 'CO-OPBANK', name: 'CO-OPBANK', sub: 'Ngân hàng Hợp tác xã Việt Nam', logo: require('./assets/logo.png') },
-    { code: 'CREDIT AGRICOLE', name: 'CREDIT AGRICOLE', sub: 'Ngân hàng Crédit Agricole Corporate and Investment - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
-    { code: 'CTBC', name: 'CTBC', sub: 'Ngân hàng TNHH CTBC', logo: require('./assets/logo.png') },
-    { code: 'CUB HCM', name: 'CUB HCM', sub: 'Cathay United Bank - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
-    { code: 'DBS', name: 'DBS', sub: 'Ngân hàng DBS - CN Hồ Chí Minh', logo: require('./assets/logos/DBS.png') },
-    { code: 'DEUTSCHE BANK', name: 'DEUTSCHE BANK', sub: 'Ngân hàng DEUTSCHE BANK', logo: require('./assets/logo.png') },
-    { code: 'DGB DAEGU CN HCM', name: 'DGB DAEGU CN HCM', sub: 'Ngân hàng Daegu - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
-    { code: 'ESB', name: 'ESB', sub: 'Ngân hàng E.SUN BANK', logo: require('./assets/logo.png') },
-    { code: 'EXIMBANK', name: 'EXIMBANK', sub: 'Ngân hàng Xuất Nhập khẩu', logo: require('./assets/logos/EXIMBANK.png') },
-    { code: 'FINVIET', name: 'FINVIET', sub: 'Công ty Cổ phần Công nghệ FINVIET', logo: require('./assets/logo.png') },
-    { code: 'FIRSTBANK HN', name: 'FIRSTBANK', sub: 'Ngân hàng First Commercial Bank - CN Hà Nội', logo: require('./assets/logo.png') },
-    { code: 'FIRSTBANK HCM', name: 'FIRSTBANK', sub: 'Ngân hàng First Commercial Bank - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
-    { code: 'GPBANK', name: 'GPBANK', sub: 'Ngân hàng Dầu khí toàn cầu', logo: require('./assets/logos/GPBANK.png') },
-    { code: 'HANOI ABC', name: 'HANOI ABC', sub: 'Ngân hàng Agricultural Bank of China Limited - CN Hà Nội', logo: require('./assets/logo.png') },
-    { code: 'HDBANK', name: 'HD BANK', sub: 'Ngân hàng Phát triển TP.HCM', logo: require('./assets/logos/HDBANK.png') },
-    { code: 'HLBVN', name: 'HLBVN', sub: 'Ngân hàng HongLeong Việt Nam', logo: require('./assets/logo.png') },
-    { code: 'HSBC', name: 'HSBC', sub: 'Ngân hàng TNHH MTV HSBC Việt Nam', logo: require('./assets/logos/HSBC.png') },
-    { code: 'HUA NAN', name: 'HUA NAN', sub: 'Ngân hàng Hua Nam Commercial Bank, Ltd - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
-    { code: 'IBK BANK HN', name: 'IBK BANK HN', sub: 'Ngân hàng Công nghiệp Hàn Quốc - CN Hà Nội', logo: require('./assets/logo.png') },
-    { code: 'IBK HCM', name: 'IBK HCM', sub: 'Ngân hàng Công nghiệp Hàn Quốc - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
-    { code: 'ICBC', name: 'ICBC', sub: 'Ngân hàng Công Thương Trung Quốc', logo: require('./assets/logo.png') },
-    { code: 'IVB', name: 'IVB', sub: 'Ngân hàng TNHH Indovina', logo: require('./assets/logos/IVB.png') },
-    { code: 'J.P.MORGAN', name: 'J.P.MORGAN', sub: 'Ngân hàng JPMorgan Chase, N.A.', logo: require('./assets/logo.png') },
-    { code: 'KB HCM', name: 'KB HCM', sub: 'Ngân hàng Kookmin - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
-    { code: 'KB HN', name: 'KB HN', sub: 'Ngân hàng Kookmin - CN Hà Nội', logo: require('./assets/logo.png') },
-    { code: 'KBANK', name: 'KBANK', sub: 'Ngân hàng đại chúng TNHH KASIKORNBANK - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
-    { code: 'KEB HANA HN', name: 'KEB HANA', sub: 'Ngân hàng KEB HANA - CN Hà Nội', logo: require('./assets/logo.png') },
-    { code: 'KEB HANA HCM', name: 'KEB HANA', sub: 'Ngân hàng KEB HANA - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
-    { code: 'KIEN LONG BANK', name: 'KIEN LONG BANK', sub: 'Ngân hàng Kiên Long', logo: require('./assets/logo.png') },
-    { code: 'LPBank', name: 'LPBank', sub: 'Ngân hàng TMCP Lộc Phát Việt Nam', logo: require('./assets/logos/LPBANK.png') },
-    { code: 'LIOBANK', name: 'LIOBANK', sub: 'Ngân hàng số Liobank - Ngân hàng TMCP Phương Đông', logo: require('./assets/logos/LIOBANK.png') },
-    { code: 'MAFC', name: 'MAFC', sub: 'Công ty Tài chính TNHH MTV Mirae Asset Việt Nam', logo: require('./assets/logo.png') },
-    { code: 'MB', name: 'MB', sub: 'Ngân hàng Quân Đội', logo: require('./assets/logos/MB.png') },
-    { code: 'Maybank Hanoi', name: 'Maybank Hanoi', sub: 'Ngân hàng Malayan Banking Berhad - CN Hà Nội', logo: require('./assets/logo.png') },
-    { code: 'Maybank HCMC', name: 'Maybank HCMC', sub: 'Ngân hàng Malayan Banking Berhad TP. Hồ Chí Minh', logo: require('./assets/logo.png') },
-    { code: 'MEGA ICBC', name: 'MEGA ICBC', sub: 'Ngân hàng Mega International Commercial Bank Co., Ltd - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
-    { code: 'MIZUHO HN', name: 'MIZUHO', sub: 'Ngân hàng Mizuho Bank, LTD - Chi nhánh Hà Nội', logo: require('./assets/logo.png') },
-    { code: 'MIZUHO', name: 'MIZUHO', sub: 'Ngân hàng Mizuho Bank, Ltd', logo: require('./assets/logo.png') },
-    { code: 'MSB', name: 'MSB', sub: 'Ngân hàng Hàng Hải', logo: require('./assets/logos/MSB.png') },
-    { code: 'MUFG HCM', name: 'MUFG', sub: 'Ngân hàng MUFG Bank. Ltd - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
-    { code: 'MUFG HN', name: 'MUFG', sub: 'Ngân hàng MUFG Bank. Ltd – Chi Nhánh Hà Nội', logo: require('./assets/logo.png') },
-    { code: 'NAM A BANK', name: 'NAM A BANK', sub: 'Ngân hàng Nam Á', logo: require('./assets/logos/NAMABANK.png') },
-    { code: 'NAPAS', name: 'NAPAS', sub: 'Công ty Cổ phần Thanh toán Quốc gia Việt Nam', logo: require('./assets/logo.png') },
-    { code: 'NCB', name: 'NCB', sub: 'Ngân hàng Quốc Dân', logo: require('./assets/logos/NCB.png') },
-    { code: 'NONGHYUP', name: 'NONGHYUP', sub: 'Ngân hàng Nonghyup - Chi nhánh Hà Nội', logo: require('./assets/logo.png') },
-    { code: 'OCB', name: 'OCB', sub: 'Ngân hàng Phương Đông', logo: require('./assets/logos/OCB.png') },
-    { code: 'OCBC', name: 'OCBC', sub: 'Ngân hàng Oversea-Chinese Banking Corporation LTD - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
-    { code: 'PAYOO', name: 'PAYOO', sub: 'Công ty Cổ phần Dịch vụ Trực tuyến Cộng Đồng Việt', logo: require('./assets/logo.png') },
-    { code: 'PGBANK', name: 'PGBANK', sub: 'Ngân hàng TMCP Thịnh vượng và Phát triển (PGBANK)', logo: require('./assets/logos/PGBANK.png') },
-    { code: 'PVCOMBANK', name: 'PVCOMBANK', sub: 'Ngân hàng Đại chúng', logo: require('./assets/logos/PVCOMBANK.png') },
-    { code: 'SACOMBANK', name: 'SACOMBANK', sub: 'Ngân hàng Sài Gòn thương tín', logo: require('./assets/logos/STB.png') },
-    { code: 'SAIGONBANK', name: 'SAIGONBANK', sub: 'Ngân hàng Sài Gòn Công Thương', logo: require('./assets/logos/SAIGONBANK.png') },
-    { code: 'SCB', name: 'SCB', sub: 'Ngân hàng Sài Gòn', logo: require('./assets/logos/SCB.png') },
-    { code: 'SCB The Siam', name: 'SCB', sub: 'Ngân hàng The Siam Commercial Bank Public Company Limited - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
-    { code: 'SCVN', name: 'SCVN', sub: 'Ngân hàng TNHH MTV Standard Chartered Việt Nam', logo: require('./assets/logo.png') },
-    { code: 'SEABANK', name: 'SEABANK', sub: 'Ngân hàng Đông Nam Á', logo: require('./assets/logos/SEABANK.png') },
-    { code: 'SHB', name: 'SHB', sub: 'Ngân hàng Sài Gòn Hà Nội', logo: require('./assets/logos/SHB.png') },
-    { code: 'SHINHAN', name: 'SHINHAN', sub: 'Ngân hàng Shinhan Bank Việt Nam', logo: require('./assets/logos/SHINHAN.png') },
-    { code: 'SHOPEEPAY', name: 'ShopeePay', sub: 'Công ty Cổ phần ShopeePay', logo: require('./assets/logo.png') },
-    { code: 'SVFC', name: 'SVFC', sub: 'Công ty Tài chính TNHH MTV Shinhan Việt Nam', logo: require('./assets/logo.png') },
-    { code: 'TAIPEI FUBON', name: 'TAIPEI FUBON', sub: 'Ngân hàng TAIPEI FUBON', logo: require('./assets/logo.png') },
-    { code: 'TECHCOMBANK', name: 'TECHCOMBANK', sub: 'Ngân hàng Kỹ thương Việt Nam', logo: require('./assets/logos/TECHCOMBANK.png') },
-    { code: 'TPBANK', name: 'TPBANK', sub: 'Ngân hàng Tiên phong', logo: require('./assets/logos/TPBANK.png') },
-    { code: 'UBANK', name: 'UBANK', sub: 'Ngân hàng UBANK BY VPBANK', logo: require('./assets/logo.png') },
-    { code: 'UMEE', name: 'UMEE', sub: 'Ngân hàng số UMEE by Kienlongbank', logo: require('./assets/logo.png') },
-    { code: 'UOB Vietnam', name: 'UOB Vietnam', sub: 'Ngân hàng TNHH MTV UOB Việt Nam', logo: require('./assets/logo.png') },
-    { code: 'VBSP', name: 'VBSP', sub: 'Ngân hàng Chính sách xã hội VBSP', logo: require('./assets/logos/VBSP.png') },
-    { code: 'VDB', name: 'VDB', sub: 'Ngân hàng Phát triển Việt Nam', logo: require('./assets/logo.png') },
-    { code: 'VIB', name: 'VIB', sub: 'Ngân hàng Quốc tế', logo: require('./assets/logos/VIB.png') },
-    { code: 'VIET A BANK', name: 'VIET A BANK', sub: 'Ngân hàng Việt Á', logo: require('./assets/logos/VIETABANK.png') },
-    { code: 'VIETBANK', name: 'VIETBANK', sub: 'Ngân hàng Việt Nam Thương Tín', logo: require('./assets/logos/VIETBANK.png') },
-    { code: 'VIETINBANK', name: 'VIETINBANK', sub: 'Ngân hàng Công Thương Việt Nam', logo: require('./assets/logos/VIETINBANK.png') },
-    { code: 'VIETTEL MONEY', name: 'VIETTEL MONEY', sub: 'Viettel Money', logo: require('./assets/logos/VIETTELMONEY.png') },
-    { code: 'Vikki Bank', name: 'Vikki Bank', sub: 'Ngân hàng Trách nhiệm hữu hạn Một thành viên số Vikki', logo: require('./assets/logo.png') },
-    { code: 'Vikki by HDBank', name: 'Vikki by HDBank', sub: 'Kênh số hóa Vikki – trực thuộc HDBank', logo: require('./assets/logo.png') },
-    { code: 'VNPT MONEY', name: 'VNPT MONEY', sub: 'VNPT Money', logo: require('./assets/logos/VNPTMONEY.png') },
-    { code: 'VPBANK', name: 'VPBANK', sub: 'Ngân hàng Việt Nam Thịnh Vượng', logo: require('./assets/logos/VPBANK.png') },
-    { code: 'Woori Bank', name: 'Woori Bank', sub: 'Ngân hàng Woori Việt Nam', logo: require('./assets/logo.png') },
-    { code: 'ZION', name: 'Công ty cổ phần Zion', sub: 'Công ty cổ phần Zion', logo: require('./assets/logo.png') },
-  ]), []);
+    const BANKS = useMemo(() => ([
+        { code: 'ABBANK', name: 'ABBANK', sub: 'Ngân hàng An Bình', logo: require('./assets/logos/ABBANK.png') },
+        { code: 'ACB', name: 'ACB', sub: 'Ngân hàng Á Châu', logo: require('./assets/logos/ACB.png') },
+        { code: 'AGRIBANK', name: 'AGRIBANK', sub: 'Ngân hàng Nông nghiệp và phát triển nông thôn Việt Nam', logo: require('./assets/logos/AGRIBANK.png') },
+        { code: 'ANZ', name: 'ANZ', sub: 'Ngân hàng TNHH Một Thành Viên ANZ Việt Nam', logo: require('./assets/logo.png') },
+        { code: 'BAC A BANK', name: 'BAC A BANK', sub: 'Ngân hàng Bắc Á', logo: require('./assets/logos/BACABANK.png') },
+        { code: 'BANGKOK BANK', name: 'BANGKOK BANK', sub: 'Ngân hàng Bangkok Bank - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
+        { code: 'BANGKOK BANK HN', name: 'BANGKOK BANK', sub: 'Ngân hàng Bangkok Bank - CN Hà Nội', logo: require('./assets/logo.png') },
+        { code: 'BAO VIET BANK', name: 'BAO VIET BANK', sub: 'Ngân hàng Bảo Việt', logo: require('./assets/logos/BAOVIETBANK.png') },
+        { code: 'BIDV', name: 'BIDV', sub: 'Ngân hàng Đầu tư và phát triển Việt Nam', logo: require('./assets/logos/BIDV.png') },
+        { code: 'BIDC HCM', name: 'BIDC', sub: 'Đầu Tư và Phát Triển Campuchia - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
+        { code: 'BIDC HN', name: 'BIDC', sub: 'Đầu Tư và Phát Triển Campuchia - CN Hà Nội', logo: require('./assets/logo.png') },
+        { code: 'BOI', name: 'BOI - BANK OF INDIA', sub: 'Ngân hàng Bank of India', logo: require('./assets/logo.png') },
+        { code: 'BSP', name: 'BSP', sub: 'Ngân hàng SINOPAC', logo: require('./assets/logo.png')},
+        { code: 'BNP PARIBAS HCM', name: 'BNP PARIBAS HCM', sub: 'Ngân hàng BNP Paribas - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
+        { code: 'BNP PARIBAS HN', name: 'BNP PARIBAS HN', sub: 'Ngân hàng BNP Paribas - CN Hà Nội', logo: require('./assets/logo.png') },
+        { code: 'BVBANK', name: 'BVBank', sub: 'Ngân hàng Bản Việt', logo: require('./assets/logos/BVBANK.png') },
+        { code: 'BVBANKTIMO', name: 'BVBANK TIMO', sub: 'Ngân hàng số Timo - Ngân hàng TMCP Bản Việt', logo: require('./assets/logos/BVBANKTIMO.png') },
+        { code: 'CAKE', name: 'CAKE', sub: 'Ngân hàng CAKE BY VPBANK', logo: require('./assets/logos/CAKE.png') },
+        { code: 'VCBNEO', name: 'VCBNeo', sub: 'Ngân hàng TM TNHH Một Thành Viên Ngoại thương Công nghệ số', logo: require('./assets/logos/VCBNEO.png') },
+        { code: 'CCB', name: 'CCB', sub: 'Ngân hàng Xây dựng Trung Quốc', logo: require('./assets/logo.png') },
+        { code: 'CIMB', name: 'CIMB', sub: 'Ngân hàng TNHH MTV CIMB Việt Nam', logo: require('./assets/logos/CIMB.png') },
+        { code: 'CITIBANK HN', name: 'CITIBANK', sub: 'Ngân hàng Citibank Việt Nam - CN Hà Nội', logo: require('./assets/logos/CITYBANK.png') },
+        { code: 'CITIBANK', name: 'CITIBANK', sub: 'Ngân hàng Citibank Việt Nam', logo: require('./assets/logos/CITYBANK.png') },
+        { code: 'CO-OPBANK', name: 'CO-OPBANK', sub: 'Ngân hàng Hợp tác xã Việt Nam', logo: require('./assets/logo.png') },
+        { code: 'CREDIT AGRICOLE', name: 'CREDIT AGRICOLE', sub: 'Ngân hàng Crédit Agricole Corporate and Investment - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
+        { code: 'CTBC', name: 'CTBC', sub: 'Ngân hàng TNHH CTBC', logo: require('./assets/logo.png') },
+        { code: 'CUB HCM', name: 'CUB HCM', sub: 'Cathay United Bank - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
+        { code: 'DBS', name: 'DBS', sub: 'Ngân hàng DBS - CN Hồ Chí Minh', logo: require('./assets/logos/DBS.png') },
+        { code: 'DEUTSCHE BANK', name: 'DEUTSCHE BANK', sub: 'Ngân hàng DEUTSCHE BANK', logo: require('./assets/logo.png') },
+        { code: 'DGB DAEGU CN HCM', name: 'DGB DAEGU CN HCM', sub: 'Ngân hàng Daegu - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
+        { code: 'ESB', name: 'ESB', sub: 'Ngân hàng E.SUN BANK', logo: require('./assets/logo.png') },
+        { code: 'EXIMBANK', name: 'EXIMBANK', sub: 'Ngân hàng Xuất Nhập khẩu', logo: require('./assets/logos/EXIMBANK.png') },
+        { code: 'FINVIET', name: 'FINVIET', sub: 'Công ty Cổ phần Công nghệ FINVIET', logo: require('./assets/logo.png') },
+        { code: 'FIRSTBANK HN', name: 'FIRSTBANK', sub: 'Ngân hàng First Commercial Bank - CN Hà Nội', logo: require('./assets/logo.png') },
+        { code: 'FIRSTBANK HCM', name: 'FIRSTBANK', sub: 'Ngân hàng First Commercial Bank - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
+        { code: 'GPBANK', name: 'GPBANK', sub: 'Ngân hàng Dầu khí toàn cầu', logo: require('./assets/logos/GPBANK.png') },
+        { code: 'HANOI ABC', name: 'HANOI ABC', sub: 'Ngân hàng Agricultural Bank of China Limited - CN Hà Nội', logo: require('./assets/logo.png') },
+        { code: 'HDBANK', name: 'HD BANK', sub: 'Ngân hàng Phát triển TP.HCM', logo: require('./assets/logos/HDBANK.png') },
+        { code: 'HLBVN', name: 'HLBVN', sub: 'Ngân hàng HongLeong Việt Nam', logo: require('./assets/logo.png') },
+        { code: 'HSBC', name: 'HSBC', sub: 'Ngân hàng TNHH MTV HSBC Việt Nam', logo: require('./assets/logos/HSBC.png') },
+        { code: 'HUA NAN', name: 'HUA NAN', sub: 'Ngân hàng Hua Nam Commercial Bank, Ltd - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
+        { code: 'IBK BANK HN', name: 'IBK BANK HN', sub: 'Ngân hàng Công nghiệp Hàn Quốc - CN Hà Nội', logo: require('./assets/logo.png') },
+        { code: 'IBK HCM', name: 'IBK HCM', sub: 'Ngân hàng Công nghiệp Hàn Quốc - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
+        { code: 'ICBC', name: 'ICBC', sub: 'Ngân hàng Công Thương Trung Quốc', logo: require('./assets/logo.png') },
+        { code: 'IVB', name: 'IVB', sub: 'Ngân hàng TNHH Indovina', logo: require('./assets/logos/IVB.png') },
+        { code: 'J.P.MORGAN', name: 'J.P.MORGAN', sub: 'Ngân hàng JPMorgan Chase, N.A.', logo: require('./assets/logo.png') },
+        { code: 'KB HCM', name: 'KB HCM', sub: 'Ngân hàng Kookmin - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
+        { code: 'KB HN', name: 'KB HN', sub: 'Ngân hàng Kookmin - CN Hà Nội', logo: require('./assets/logo.png') },
+        { code: 'KBANK', name: 'KBANK', sub: 'Ngân hàng đại chúng TNHH KASIKORNBANK - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
+        { code: 'KEB HANA HN', name: 'KEB HANA', sub: 'Ngân hàng KEB HANA - CN Hà Nội', logo: require('./assets/logo.png') },
+        { code: 'KEB HANA HCM', name: 'KEB HANA', sub: 'Ngân hàng KEB HANA - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
+        { code: 'KIEN LONG BANK', name: 'KIEN LONG BANK', sub: 'Ngân hàng Kiên Long', logo: require('./assets/logo.png') },
+        { code: 'LPBank', name: 'LPBank', sub: 'Ngân hàng TMCP Lộc Phát Việt Nam', logo: require('./assets/logos/LPBANK.png') },
+        { code: 'LIOBANK', name: 'LIOBANK', sub: 'Ngân hàng số Liobank - Ngân hàng TMCP Phương Đông', logo: require('./assets/logos/LIOBANK.png') },
+        { code: 'MAFC', name: 'MAFC', sub: 'Công ty Tài chính TNHH MTV Mirae Asset Việt Nam', logo: require('./assets/logo.png') },
+        { code: 'MB', name: 'MB', sub: 'Ngân hàng Quân Đội', logo: require('./assets/logos/MB.png') },
+        { code: 'Maybank Hanoi', name: 'Maybank Hanoi', sub: 'Ngân hàng Malayan Banking Berhad - CN Hà Nội', logo: require('./assets/logo.png') },
+        { code: 'Maybank HCMC', name: 'Maybank HCMC', sub: 'Ngân hàng Malayan Banking Berhad TP. Hồ Chí Minh', logo: require('./assets/logo.png') },
+        { code: 'MEGA ICBC', name: 'MEGA ICBC', sub: 'Ngân hàng Mega International Commercial Bank Co., Ltd - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
+        { code: 'MIZUHO HN', name: 'MIZUHO', sub: 'Ngân hàng Mizuho Bank, LTD - Chi nhánh Hà Nội', logo: require('./assets/logo.png') },
+        { code: 'MIZUHO', name: 'MIZUHO', sub: 'Ngân hàng Mizuho Bank, Ltd', logo: require('./assets/logo.png') },
+        { code: 'MSB', name: 'MSB', sub: 'Ngân hàng Hàng Hải', logo: require('./assets/logos/MSB.png') },
+        { code: 'MUFG HCM', name: 'MUFG', sub: 'Ngân hàng MUFG Bank. Ltd - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
+        { code: 'MUFG HN', name: 'MUFG', sub: 'Ngân hàng MUFG Bank. Ltd – Chi Nhánh Hà Nội', logo: require('./assets/logo.png') },
+        { code: 'NAM A BANK', name: 'NAM A BANK', sub: 'Ngân hàng Nam Á', logo: require('./assets/logos/NAMABANK.png') },
+        { code: 'NAPAS', name: 'NAPAS', sub: 'Công ty Cổ phần Thanh toán Quốc gia Việt Nam', logo: require('./assets/logo.png') },
+        { code: 'NCB', name: 'NCB', sub: 'Ngân hàng Quốc Dân', logo: require('./assets/logos/NCB.png') },
+        { code: 'NONGHYUP', name: 'NONGHYUP', sub: 'Ngân hàng Nonghyup - Chi nhánh Hà Nội', logo: require('./assets/logo.png') },
+        { code: 'OCB', name: 'OCB', sub: 'Ngân hàng Phương Đông', logo: require('./assets/logos/OCB.png') },
+        { code: 'OCBC', name: 'OCBC', sub: 'Ngân hàng Oversea-Chinese Banking Corporation LTD - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
+        { code: 'PAYOO', name: 'PAYOO', sub: 'Công ty Cổ phần Dịch vụ Trực tuyến Cộng Đồng Việt', logo: require('./assets/logo.png') },
+        { code: 'PGBANK', name: 'PGBANK', sub: 'Ngân hàng TMCP Thịnh vượng và Phát triển (PGBANK)', logo: require('./assets/logos/PGBANK.png') },
+        { code: 'PVCOMBANK', name: 'PVCOMBANK', sub: 'Ngân hàng Đại chúng', logo: require('./assets/logos/PVCOMBANK.png') },
+        { code: 'SACOMBANK', name: 'SACOMBANK', sub: 'Ngân hàng Sài Gòn thương tín', logo: require('./assets/logos/STB.png') },
+        { code: 'SAIGONBANK', name: 'SAIGONBANK', sub: 'Ngân hàng Sài Gòn Công Thương', logo: require('./assets/logos/SAIGONBANK.png') },
+        { code: 'SCB', name: 'SCB', sub: 'Ngân hàng Sài Gòn', logo: require('./assets/logos/SCB.png') },
+        { code: 'SCB The Siam', name: 'SCB', sub: 'Ngân hàng The Siam Commercial Bank Public Company Limited - CN TP Hồ Chí Minh', logo: require('./assets/logo.png') },
+        { code: 'SCVN', name: 'SCVN', sub: 'Ngân hàng TNHH MTV Standard Chartered Việt Nam', logo: require('./assets/logo.png') },
+        { code: 'SEABANK', name: 'SEABANK', sub: 'Ngân hàng Đông Nam Á', logo: require('./assets/logos/SEABANK.png') },
+        { code: 'SHB', name: 'SHB', sub: 'Ngân hàng Sài Gòn Hà Nội', logo: require('./assets/logos/SHB.png') },
+        { code: 'SHINHAN', name: 'SHINHAN', sub: 'Ngân hàng Shinhan Bank Việt Nam', logo: require('./assets/logos/SHINHAN.png') },
+        { code: 'SHOPEEPAY', name: 'ShopeePay', sub: 'Công ty Cổ phần ShopeePay', logo: require('./assets/logo.png') },
+        { code: 'SVFC', name: 'SVFC', sub: 'Công ty Tài chính TNHH MTV Shinhan Việt Nam', logo: require('./assets/logo.png') },
+        { code: 'TAIPEI FUBON', name: 'TAIPEI FUBON', sub: 'Ngân hàng TAIPEI FUBON', logo: require('./assets/logo.png') },
+        { code: 'TECHCOMBANK', name: 'TECHCOMBANK', sub: 'Ngân hàng Kỹ thương Việt Nam', logo: require('./assets/logos/TECHCOMBANK.png') },
+        { code: 'TPBANK', name: 'TPBANK', sub: 'Ngân hàng Tiên phong', logo: require('./assets/logos/TPBANK.png') },
+        { code: 'UBANK', name: 'UBANK', sub: 'Ngân hàng UBANK BY VPBANK', logo: require('./assets/logo.png') },
+        { code: 'UMEE', name: 'UMEE', sub: 'Ngân hàng số UMEE by Kienlongbank', logo: require('./assets/logo.png') },
+        { code: 'UOB Vietnam', name: 'UOB Vietnam', sub: 'Ngân hàng TNHH MTV UOB Việt Nam', logo: require('./assets/logo.png') },
+        { code: 'VBSP', name: 'VBSP', sub: 'Ngân hàng Chính sách xã hội VBSP', logo: require('./assets/logos/VBSP.png') },
+        { code: 'VDB', name: 'VDB', sub: 'Ngân hàng Phát triển Việt Nam', logo: require('./assets/logo.png') },
+        { code: 'VIB', name: 'VIB', sub: 'Ngân hàng Quốc tế', logo: require('./assets/logos/VIB.png') },
+        { code: 'VIET A BANK', name: 'VIET A BANK', sub: 'Ngân hàng Việt Á', logo: require('./assets/logos/VIETABANK.png') },
+        { code: 'VIETBANK', name: 'VIETBANK', sub: 'Ngân hàng Việt Nam Thương Tín', logo: require('./assets/logos/VIETBANK.png') },
+        { code: 'VIETINBANK', name: 'VIETINBANK', sub: 'Ngân hàng Công Thương Việt Nam', logo: require('./assets/logos/VIETINBANK.png') },
+        { code: 'VIETTEL MONEY', name: 'VIETTEL MONEY', sub: 'Viettel Money', logo: require('./assets/logos/VIETTELMONEY.png') },
+        { code: 'Vikki Bank', name: 'Vikki Bank', sub: 'Ngân hàng Trách nhiệm hữu hạn Một thành viên số Vikki', logo: require('./assets/logo.png') },
+        { code: 'Vikki by HDBank', name: 'Vikki by HDBank', sub: 'Kênh số hóa Vikki – trực thuộc HDBank', logo: require('./assets/logo.png') },
+        { code: 'VNPT MONEY', name: 'VNPT MONEY', sub: 'VNPT Money', logo: require('./assets/logos/VNPTMONEY.png') },
+        { code: 'VPBANK', name: 'VPBANK', sub: 'Ngân hàng Việt Nam Thịnh Vượng', logo: require('./assets/logos/VPBANK.png') },
+        { code: 'Woori Bank', name: 'Woori Bank', sub: 'Ngân hàng Woori Việt Nam', logo: require('./assets/logo.png') },
+        { code: 'ZION', name: 'Công ty cổ phần Zion', sub: 'Công ty cổ phần Zion', logo: require('./assets/logo.png') },
+    ]), []);
 
   const filteredBanks = useMemo(() => {
     const q = bankSearch.trim().toLowerCase();
     if (!q) return BANKS;
-    return BANKS.filter(b =>
-      b.name.toLowerCase().includes(q) ||
-      (b.sub || '').toLowerCase().includes(q) ||
-      b.code.toLowerCase().includes(q)
-    );
+    return BANKS.filter(b => b.name.toLowerCase().includes(q) || (b.sub || '').toLowerCase().includes(q) || b.code.toLowerCase().includes(q) );
   }, [BANKS, bankSearch]);
   
   const currentSubCategories = useMemo(() => {
@@ -771,39 +625,26 @@ function Transfer({ navigation, username, srcAcc, balance, phone }) {
 
   const placeholderTextColor = '#9aa1a6';
 
-  // helper: parse "2.000"/"2,000" -> 2000
-  const parseVND = (s) => Number(String(s ?? '0').replace(/\D/g, '')) || 0;
-
   const handleContinue = () => {
     if (!destAcc || !amount || !bankSelected || !receiver) {
       Alert.alert("Thông báo", "Vui lòng nhập đầy đủ thông tin người nhận, ngân hàng và số tiền.");
       return;
     }
-
-    const amt = parseVND(amount);
-    const bal = Number(balance) || 0;
-
-    // ❌ Không đủ số dư -> bật modal lỗi
-    if (amt > bal) {
-      setInsuffModal(true);
-      return;
-    }
-
-    // ✅ Đủ tiền -> sang Confirm
     const details = {
       srcAcc: srcAcc,
       destAcc: destAcc,
       receiver: receiver,
-      amount: amt,                 // chuyển số
+      amount: amount,
       note: note,
       bank: bankSelected,
-      fee: 0, 
+      fee: 0,
       phone: phone,
-      balance: bal,
+      balance: balance,
       username: username,
     };
     navigation.navigate('Confirm', { details });
   };
+
 
   return (
     <KeyboardAvoidingView style={{ flex:1, backgroundColor:'#fff' }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -828,19 +669,21 @@ function Transfer({ navigation, username, srcAcc, balance, phone }) {
       <TouchableOpacity
         style={headerButtonStyles.homeButton}
         onPress={() =>
-          navigation.reset({
-            index: 1,
-            routes: [{ name: 'Login2' }, { name: 'Home' }],
-          })
-        }
+  navigation.reset({
+    index: 1,
+    routes: [
+      { name: 'Login2' },
+      { name: 'Home' }
+    ],
+  })
+}
       />
 
       <ScrollView bounces={false} alwaysBounceVertical={false} overScrollMode="never" showsVerticalScrollIndicator={false}
-                  contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
+              contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
         <View style={{ width: SW, height: H }}>
           <ImageBackground source={BgTransfer} style={StyleSheet.absoluteFillObject} resizeMode="contain" />
           <Text style={[overlayStyles.srcAcc, { left: bx(POS.srcAcc.x), top: by(POS.srcAcc.y) }]}>{srcAcc}</Text>
-
           {/* ===== SỐ DƯ (nở sang trái) ===== */}
           <View
             style={{
@@ -848,11 +691,12 @@ function Transfer({ navigation, username, srcAcc, balance, phone }) {
               top: by(POS.balNumber.y),
               left: bx(POS.balNumber.x),
               width: SW * (POS.balVnd.x - POS.balNumber.x) - GAP, // tới sát trước VND
-              alignItems: 'flex-end',
+              alignItems: 'flex-end', // canh phải cho nội dung bên trong
             }}
           >
             <Text
               style={{
+                // KHÔNG dùng overlayStyles.balNumber vì style đó có position:'absolute'
                 color: '#fff',
                 fontFamily: FONT_HEAVY,
                 fontSize: 22,
@@ -865,10 +709,10 @@ function Transfer({ navigation, username, srcAcc, balance, phone }) {
             </Text>
           </View>
 
-          {/* ===== VND ===== */}
+          {/* ===== VND (dịch riêng bằng POS.balVnd) ===== */}
           <Text
             style={[
-              overlayStyles.balVnd,
+              overlayStyles.balVnd, // style này đã absolute sẵn
               { left: bx(POS.balVnd.x), top: by(POS.balVnd.y) }
             ]}
           >
@@ -889,9 +733,8 @@ function Transfer({ navigation, username, srcAcc, balance, phone }) {
           )}
 
           <TextInput value={destAcc} onChangeText={(t) => setDestAcc(t.replace(/\s/g,''))} placeholder="Chọn hoặc nhập số tài khoản/số thẻ..." placeholderTextColor={placeholderTextColor} keyboardType="number-pad" style={[overlayStyles.editableInput, { left: bx(POS.destAcc.x), top: by(POS.destAcc.y), width: SW*0.78 }]}/>
-          <TextInput value={receiver} onChangeText={(t) => setReceiver(capitalizeWords(normalizeInput(t)))} placeholder="Nhập tên người nhận" placeholderTextColor={placeholderTextColor} style={[overlayStyles.editableInput, { left: bx(POS.receiver.x), top: by(POS.receiver.y), width: SW*0.78 }]} autoCorrect={false}  autoCapitalize="none"  spellCheck={false}  keyboardType="visible-password"  smartDashesType="no"  smartQuotesType="no"  textContentType="none" />
-          
-          {/* Số tiền */}
+          <TextInput value={receiver} onChangeText={(text) => setReceiver(capitalizeWords(text))} placeholder="Nhập tên người nhận" placeholderTextColor={placeholderTextColor} style={[overlayStyles.editableInput, { left: bx(POS.receiver.x), top: by(POS.receiver.y), width: SW*0.78 }]}/>
+          {/* Sửa lỗi UI: Thêm adjustsFontSizeToFit để số tiền không bị tràn */}
           <TextInput
             value={amount ? formatVNCurrency(amount) : ''}
             onChangeText={(t) => setAmount(t.replace(/\D/g,''))}
@@ -903,15 +746,8 @@ function Transfer({ navigation, username, srcAcc, balance, phone }) {
             numberOfLines={1}
             minimumFontScale={0.7}
           />
-
-          <TextInput value={note} onChangeText={(t) => setNote(normalizeInput(t))} placeholder="Nhập nội dung chuyển khoản" placeholderTextColor={placeholderTextColor} autoCorrect={false} autoCapitalize="none" style={[overlayStyles.editableInput,
-            { left: bx(POS.note.x), top: by(POS.note.y), width: SW*0.78 }]} spellCheck={false}  keyboardType="visible-password"  smartDashesType="no"  smartQuotesType="no"  textContentType="none" />
-          {selectedPurpose ? (
-            <Text style={[overlayStyles.editableInput, {left: bx(POS.purposePh.x), top: by(POS.purposePh.y)}]}>{selectedPurpose}</Text>
-          ) : (
-            <Text style={[overlayStyles.placeholder, {left: bx(POS.purposePh.x), top: by(POS.purposePh.y), position:'absolute'}]}>Chọn giao dịch theo mục đích</Text>
-          )}
-
+          <TextInput value={note} onChangeText={setNote} placeholder="Nhập nội dung chuyển khoản" placeholderTextColor={placeholderTextColor} style={[overlayStyles.editableInput, { left: bx(POS.note.x), top: by(POS.note.y), width: SW*0.78 }]}/>
+          {selectedPurpose ? (<Text style={[overlayStyles.editableInput, {left: bx(POS.purposePh.x), top: by(POS.purposePh.y)}]}>{selectedPurpose}</Text>) : (<Text style={[overlayStyles.placeholder, {left: bx(POS.purposePh.x), top: by(POS.purposePh.y), position:'absolute'}]}>Chọn giao dịch theo mục đích</Text>)}
           <TouchableOpacity activeOpacity={0.8} onPress={() => setBankModal(true)} style={{ position:'absolute', left: bx(0.075), top: by(0.295), width: SW*0.85, height: 54 }}/>
           <TouchableOpacity activeOpacity={0.8} onPress={() => setPurposeModalVisible(true)} style={{ position: 'absolute', left: bx(0.075), top: by(0.780 - 0.023), width: SW * 0.85, height: 54 }}/>
         </View>
@@ -929,13 +765,15 @@ function Transfer({ navigation, username, srcAcc, balance, phone }) {
         }}
       >
         <Image
-          source={BottomContinue}
-          style={{ width: '100%', height: '100%' }}
-          resizeMode="contain"
+            source={BottomContinue}
+            style={{
+                width: '100%',
+                height: '100%',
+            }}
+            resizeMode="contain"
         />
       </TouchableOpacity>
       
-      {/* Modal chọn ngân hàng */}
       <Modal visible={bankModal} transparent animationType="slide" onRequestClose={()=>setBankModal(false)}>
         <View style={bankStyles.backdrop}>
           <View style={bankStyles.sheet}>
@@ -980,29 +818,13 @@ function Transfer({ navigation, username, srcAcc, balance, phone }) {
         </View>
       </Modal>
 
-      {/* Modal chọn mục đích */}
       <Modal visible={isPurposeModalVisible} transparent animationType="slide" onRequestClose={() => setPurposeModalVisible(false)}>
         <View style={purposeModalStyles.backdrop}>
           <View style={purposeModalStyles.sheet}>
-            <View style={purposeModalStyles.header}>
-              <Text style={purposeModalStyles.title}>Chọn danh mục chi</Text>
-              <TouchableOpacity onPress={() => setPurposeModalVisible(false)} style={purposeModalStyles.closeButton}>
-                <Text style={{ fontSize: 20, color: '#555' }}>✕</Text>
-              </TouchableOpacity>
-            </View>
+            <View style={purposeModalStyles.header}><Text style={purposeModalStyles.title}>Chọn danh mục chi</Text><TouchableOpacity onPress={() => setPurposeModalVisible(false)} style={purposeModalStyles.closeButton}><Text style={{ fontSize: 20, color: '#555' }}>✕</Text></TouchableOpacity></View>
             <View style={{ height: 50, borderBottomWidth: 1, borderColor: '#f0f0f0' }}>
               <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={purposeModalStyles.mainCategoryContainer}>
-                {SPENDING_CATEGORIES.map((cat) => (
-                  <TouchableOpacity
-                    key={cat.main}
-                    style={[purposeModalStyles.mainCategoryTab, activeMainCategory === cat.main && purposeModalStyles.mainCategoryTabActive]}
-                    onPress={() => setActiveMainCategory(cat.main)}
-                  >
-                    <Text style={[purposeModalStyles.mainCategoryText, activeMainCategory === cat.main && purposeModalStyles.mainCategoryTextActive]}>
-                      {cat.main}
-                    </Text>
-                  </TouchableOpacity>
-                ))}
+                {SPENDING_CATEGORIES.map((cat) => (<TouchableOpacity key={cat.main} style={[purposeModalStyles.mainCategoryTab, activeMainCategory === cat.main && purposeModalStyles.mainCategoryTabActive]} onPress={() => setActiveMainCategory(cat.main)}><Text style={[purposeModalStyles.mainCategoryText, activeMainCategory === cat.main && purposeModalStyles.mainCategoryTextActive]}>{cat.main}</Text></TouchableOpacity>))}
               </ScrollView>
             </View>
             <FlatList
@@ -1020,38 +842,28 @@ function Transfer({ navigation, username, srcAcc, balance, phone }) {
           </View>
         </View>
       </Modal>
-
-      {/* Modal KHÔNG ĐỦ SỐ DƯ */}
-      <Modal visible={insuffModal} transparent animationType="fade" onRequestClose={() => setInsuffModal(false)}>
-        <View style={{ flex:1, backgroundColor:'rgba(0,0,0,0.45)', alignItems:'center', justifyContent:'center' }}>
-          <View style={{ width:'82%', backgroundColor:'#fff', borderRadius:16, padding:20, alignItems:'center' }}>
-            <Image source={require('./assets/noti.png')} style={{ width:64, height:64, marginBottom:12 }} resizeMode="contain" />
-            <Text style={{ fontSize:15, color:'#333', textAlign:'center', marginBottom:20, lineHeight:22, fontFamily: FONT_REG }}>
-              Giao dịch không thành công do tài khoản của Quý khách không đủ số dư.{'\n'}Vui lòng kiểm tra lại.
-            </Text>
-            <TouchableOpacity onPress={() => setInsuffModal(false)} style={{ backgroundColor:'#009245', paddingHorizontal:28, paddingVertical:12, borderRadius:8 }}>
-              <Text style={{ color:'#fff', fontFamily: FONT_HEAVY }}>Đóng</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
-
     </KeyboardAvoidingView>
   );
 }
+
+const pad2 = (n) => String(n).padStart(2, '0');
+const getVNWeekday = (d) => ([
+  'Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'
+])[d.getDay()];
+
+const fmtVNDateTime = (d = new Date()) =>
+  `${pad2(d.getHours())}:${pad2(d.getMinutes())} ${getVNWeekday(d)} ${pad2(d.getDate())}/${pad2(d.getMonth()+1)}/${d.getFullYear()}`;
 
 /* =========================================================
    CONFIRM
 ========================================================= */
 function Confirm({ route, navigation }) {
-    const RIGHT_COL_LEFT = 170;  // điểm bắt đầu cột giá trị (sau nhãn)
-    const SIDE_PAD = 20;         // lề phải
     const { width: IMG_W, height: IMG_H } = Image.resolveAssetSource(BgConfirm);
     const ratio = IMG_H / IMG_W;
     const H = SW * ratio;
     const by = (p) => p * H;
     const { details } = route.params;
-    const VALUE_COL_MAX = SW * 0.76;
+ 
     const [otpModalVisible, setOtpModalVisible] = useState(false);
     const [otp, setOtp] = useState('');
     const otpInputs = useRef([]);
@@ -1089,13 +901,18 @@ function Confirm({ route, navigation }) {
         return result.charAt(0).toUpperCase() + result.slice(1) + " đồng";
     };
 
+    // ===== SỬA ĐỔI TẠI ĐÂY =====
     const formatNote = (note) => {
+      if (!note) return '';
       const words = note.split(' ');
-      if (words.length > 1) {
-          const lastWord = words.pop();
-          return `${words.join(' ')}\n${lastWord}`;
-      }
-      return note;
+  
+      const part1 = words.slice(0, 4).join(' ');
+      const part2 = words.slice(4, 9).join(' ');
+      const part3 = words.slice(9).join(' ');
+  
+      // Lọc ra các phần có nội dung và nối chúng bằng ký tự xuống dòng
+      const parts = [part1, part2, part3].filter(part => part);
+      return parts.join('\n');
     };
     
     const handleOtpChange = (text) => {
@@ -1159,45 +976,45 @@ function Confirm({ route, navigation }) {
           */}
           {(() => {
             const POS = {
-              method:   { top: 0.218, align: 'right' }, // Chuyển tiền nhanh 24/7
+              method:   { top: 0.219, align: 'right' }, // Chuyển tiền nhanh 24/7
               srcAcc:   { top: 0.296, align: 'right' }, // Tài khoản nguồn
               destAcc:  { top: 0.349, align: 'right' }, // Tài khoản nhận
-              receiver: { top: 0.401, align: 'right' }, // Người nhận
+              receiver: { top: 0.402, align: 'right' }, // Tên người nhận
               bankCode:  { top: 0.455, align: 'right' }, // Tên ngân hàng
               bankSub:   { top: 0.489, align: 'right' }, // Mô tả ngân hàng
-              note:     { top: 0.532, align: 'right' }, // Nội dung
-              fee:      { top: 0.610, align: 'right' }, // Phí
-              amountNum:{ top: 0.677, align: 'right' }, // Số tiền
-              amountVnd:{ top: 0.677, align: 'right' }, // Chữ VND
-              amountTxt:{ top: 0.710, align: 'right' }, // Số tiền bằng chữ
+              note:     { top: 0.533, align: 'right' }, // Nội dung
+              fee:      { top: 0.636, align: 'right' }, // Phí
+              amountNum:{ top: 0.704, align: 'right' }, // Số tiền
+              amountVnd:{ top: 0.704, align: 'right' }, // Chữ VND
+              amountTxt:{ top: 0.737, align: 'right' }, // Số tiền bằng chữ
             };
             return (
               <>
                 {/* Hình thức chuyển */}
                 <View style={[confirmStyles.valueContainer, { top: by(POS.method.top), right: 35, left: 35 }]}>
-                  <Text style={[confirmStyles.value, { textAlign: POS.method.align }, { fontFamily: FONT_HEAVY }]}>
+                  <Text style={[confirmStyles.value, { textAlign: POS.method.align }, { fontFamily: FONT_BOLD }]}>
                     {'Chuyển tiền nhanh\n24/7'}
                   </Text>
                 </View>
 
                 {/* Tài khoản nguồn */}
                 <View style={[confirmStyles.valueContainer, { top: by(POS.srcAcc.top), right: 35, left: 35 }]}>
-                  <Text style={[confirmStyles.value, { fontFamily: FONT_HEAVY }]}>
+                  <Text style={[confirmStyles.value, { fontFamily: FONT_BOLD }]}>
                     {details.srcAcc}
                   </Text>
                 </View>
 
                 {/* Tài khoản nhận */}
                 <View style={[confirmStyles.valueContainer, { top: by(POS.destAcc.top), right: 35, left: 35 }]}>
-                  <Text style={[confirmStyles.value, { fontFamily: FONT_HEAVY }]}>
+                  <Text style={[confirmStyles.value, { fontFamily: FONT_BOLD }]}>
                     {details.destAcc}
                   </Text>
                 </View>
 
                 {/* Tên người nhận */}
                 <View style={[confirmStyles.valueContainer, { top: by(POS.receiver.top), right: 35, left: 35 }]}>
-                  <Text style={[confirmStyles.value, confirmStyles.receiverRed, { fontFamily: FONT_HEAVY, color: '#f30808ff'}]}>
-                    {details.receiver}
+                  <Text style={[confirmStyles.value, confirmStyles.receiverRed, { fontFamily: FONT_BOLD, color: '#f30808'}]}>
+                    {details.receiver?.toUpperCase()}
                   </Text>
                 </View>
 
@@ -1205,7 +1022,7 @@ function Confirm({ route, navigation }) {
                 <View style={[confirmStyles.valueContainer, { top: by(POS.bankCode.top), right: 35, left: 35 }]}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <BankLogo localSource={details.bank.logo} size={24} />
-                    <Text style={[confirmStyles.value, { marginLeft: 8, fontFamily: FONT_HEAVY }]}>
+                    <Text style={[confirmStyles.value, { marginLeft: 8, fontFamily: FONT_BOLD }]}>
                       {details.bank.code}
                     </Text>
                   </View>
@@ -1222,44 +1039,34 @@ function Confirm({ route, navigation }) {
                 </View>
 
                 {/* Nội dung */}
-                <View style={[confirmStyles.valueContainer, { top: by(POS.note.top), left: 20, right: 35 }]}>
-                  <Text
-                    style={[
-                      confirmStyles.value,
-                      { textAlign: 'right', fontFamily: FONT_HEAVY }
-                    ]}
-                    numberOfLines={2}          // cho phép tối đa 2 dòng
-                    ellipsizeMode="tail"       // nếu dài quá thì "..."
-                    adjustsFontSizeToFit={true}
-                  >
-                    {formatNote(details.note)}
-                  </Text>
+                <View style={[confirmStyles.valueContainer, { top: by(POS.note.top), right: 35, left: 35 }]}>
+                  <Text style={[confirmStyles.value, { textAlign: POS.note.align, fontFamily: FONT_BOLD }]}>{formatNote(details.note)}</Text>
                 </View>
 
                 {/* Phí */}
                 <View style={[confirmStyles.valueContainer, { top: by(POS.fee.top), right: 35, left: 35 }]}>
-                  <Text style={[confirmStyles.value, { fontFamily: FONT_HEAVY }]}>
+                  <Text style={[confirmStyles.value, { fontFamily: FONT_BOLD }]}>
                     {details.fee === 0 ? 'Miễn phí' : `${formatVNCurrency(details.fee)} VND`}
                   </Text>
                 </View>
 
                 {/* Số tiền */}
                 <View style={[confirmStyles.valueContainer, { top: by(POS.amountNum.top), right: 66 }]}>
-                  <Text style={[confirmStyles.value, confirmStyles.amountRed, { fontFamily: FONT_HEAVY, fontSize: 18, color: '#ff3a2cff'}]}>
+                  <Text style={[confirmStyles.value, confirmStyles.amountRed, { fontFamily: FONT_HEAVY, fontSize: 20, color: '#ff3a2c'}]}>
                     {formatVNCurrency(details.amount)}
                   </Text>
                 </View>
 
                 {/* VND */}
                 <View style={[confirmStyles.valueContainer, { top: by(POS.amountVnd.top), right: 35 }]}>
-                  <Text style={[confirmStyles.value, confirmStyles.subAmountRed, { fontSize: 14, color: '#f51111ff'}]}>
+                  <Text style={[confirmStyles.value, confirmStyles.subAmountRed, { fontSize: 14, color: '#f30808'}]}>
                     VND
                   </Text>
                 </View>
 
                 {/* Số tiền bằng chữ */}
                 <View style={[confirmStyles.valueContainer, { top: by(POS.amountTxt.top), right: 35 }]}>
-                  <Text style={[confirmStyles.value, confirmStyles.subAmountRed, { fontSize: 14, fontStyle: 'italic', textAlign: 'right', color: '#f30808ff' }]}>
+                  <Text style={[confirmStyles.value, confirmStyles.subAmountRed, { fontSize: 14, fontStyle: 'italic', textAlign: 'right', color: '#f30808' }]}>
                     ({docso(details.amount)})
                   </Text>
                 </View>
@@ -1363,15 +1170,19 @@ function Confirm({ route, navigation }) {
 ========================================================= */
 function Success({ route, navigation }) {
   const { details } = route.params;
+  // ===== SỬA ĐỔI TẠI ĐÂY (Đồng bộ với màn hình Confirm) =====
   const formatNote = (note) => {
-  if (!note) return '';
-  const words = note.split(' ');
-  if (words.length > 1) {
-    const lastWord = words.pop();
-    return `${words.join(' ')}\n${lastWord}`;
-  }
-  return note;
-};
+    if (!note) return '';
+    const words = note.split(' ');
+
+    const part1 = words.slice(0, 4).join(' ');
+    const part2 = words.slice(4, 9).join(' ');
+    const part3 = words.slice(9).join(' ');
+
+    // Lọc ra các phần có nội dung và nối chúng bằng ký tự xuống dòng
+    const parts = [part1, part2, part3].filter(part => part);
+    return parts.join('\n');
+  };
 
   // Kích thước nền theo tỉ lệ ảnh
   const { width: IMG_W, height: IMG_H } = Image.resolveAssetSource(BgSuccess);
@@ -1453,17 +1264,17 @@ function Success({ route, navigation }) {
   const POS = {
     // Bạn chỉ việc đổi các con số top (%) dưới đây
     // cho đúng hình success của bạn
-    amountNum: { top: 0.208, align: 'right' },  // Số tiền (đỏ)
-    amountVnd: { top: 0.207, align: 'right' },  // VND (đỏ)
-    time:      { top: 0.248, align: 'center'},  // Giờ giao dịch
-    destAcc:   { top: 0.298, align: 'right' },  // Tài khoản nhận
-    receiver:  { top: 0.347, align: 'right' },  // Người nhận
-    bankCode:  { top: 0.398, align: 'right' },  // Tên ngân hàng
-    bankSub:   { top: 0.424, align: 'right' },  // Mô tả ngân hàng
-    note:      { top: 0.465, align: 'right' },  // Nội dung
-    fee:       { top: 0.524, align: 'right' },  // Phí
-    method:    { top: 0.572, align: 'right' },  // Chuyển tiền nhanh 24/7
-    transId:   { top: 0.634, align: 'right' },  // Mã giao dịch
+    amountNum: { top: 0.216, align: 'right' },  // Số tiền (đỏ)
+    amountVnd: { top: 0.206, align: 'right' },  // VND (đỏ)
+    time:      { top: 0.258, align: 'center'},  // Giờ giao dịch
+    destAcc:   { top: 0.312, align: 'right' },  // Tài khoản nhận
+    receiver:  { top: 0.363, align: 'right' },  // Người nhận
+    bankCode:  { top: 0.415, align: 'right' },  // Tên ngân hàng
+    bankSub:   { top: 0.443, align: 'right' },  // Mô tả ngân hàng
+    note:      { top: 0.476, align: 'right' },  // Nội dung
+    fee:       { top: 0.568, align: 'right' },  // Phí
+    method:    { top: 0.619, align: 'right' },  // Chuyển tiền nhanh 24/7
+    transId:   { top: 0.682, align: 'right' },  // Mã giao dịch
   };
 
   // Kích thước bottom overlay
@@ -1513,19 +1324,19 @@ function Success({ route, navigation }) {
             {/* Số tiền (không đổi) */}
             <Text style={{
                 fontFamily: FONT_HEAVY,
-                fontSize: 28,
-                color: '#065035ff',
+                fontSize: 29,
+                color: '#0b4b31',
             }}>
                 {formatVNCurrency(details.amount)}
             </Text>
             {/* Chữ VND */}
             <Text style={{
-                fontSize: 15,
+                fontSize: 14,
                 color: '#698f81',
                 fontFamily: FONT_MEDIUM,
-                marginLeft: 3,
+                marginLeft: 4,
                 // THÊM DÒNG NÀY ĐỂ DỊCH CHUYỂN CHỮ LÊN TRÊN
-                transform: [{ translateY: -16 }] 
+                transform: [{ translateY: -15 }]
             }}>
                 VND
             </Text>
@@ -1536,72 +1347,56 @@ function Success({ route, navigation }) {
           confirmStyles.valueContainer,
           { top: by(POS.time.top), left: 35, right: 35, alignItems: 'center' } // override
         ]}>
-          <Text style={[successStyles.timestampText, { fontFamily: FONT_SEMI }]}>
+          <Text style={[successStyles.timestampText, { fontFamily: FONT_MEDIUM }]}>
             {fmtVNDateTime(new Date())}
           </Text>
         </View>
 
-        {/* Hình thức chuyển */}
-        <View style={[confirmStyles.valueContainer, { top: by(POS.method.top), right: 35, left: 35 }]}>
-          <Text style={[confirmStyles.value, { textAlign: POS.method.align, fontFamily: FONT_HEAVY }]}>{'Chuyển tiền nhanh\n24/7'}</Text>
-        </View>
-
         {/* Tài khoản nhận */}
-        <View style={[confirmStyles.valueContainer, { top: by(POS.destAcc.top), right: 35, left: 35 }]}>
-          <Text style={[confirmStyles.value, { fontFamily: FONT_HEAVY }]}>{details.destAcc}</Text>
+        <View style={[confirmStyles.valueContainer, { top: by(POS.destAcc.top), right: 32, left: 35 }]}>
+          <Text style={[confirmStyles.value, { fontFamily: FONT_BOLD }]}>{details.destAcc}</Text>
         </View>
 
         {/* Người nhận (đỏ) */}
-        <View style={[confirmStyles.valueContainer, { top: by(POS.receiver.top), right: 35, left: 35 }]}>
-          <Text style={[confirmStyles.value, confirmStyles.receiverRed, { fontFamily: FONT_HEAVY }]}>
+        <View style={[confirmStyles.valueContainer, { top: by(POS.receiver.top), right: 32, left: 35 }]}>
+          <Text style={[confirmStyles.value, confirmStyles.receiverRed, { fontFamily: FONT_BOLD }]}>
             {details.receiver?.toUpperCase()}
           </Text>
         </View>
 
         {/* Ngân hàng nhận */}
-        <View style={[confirmStyles.valueContainer, { top: by(POS.bankCode.top), right: 35, left: 35 }]}>
+        <View style={[confirmStyles.valueContainer, { top: by(POS.bankCode.top), right: 32, left: 35 }]}>
           <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-end' }}>
             <BankLogo localSource={details.bank.logo} size={24} />
-            <Text style={[confirmStyles.value, { marginLeft: 8, fontFamily: FONT_HEAVY }]}>{details.bank.code}</Text>
+            <Text style={[confirmStyles.value, { marginLeft: 8, fontFamily: FONT_BOLD }]}>{details.bank.code}</Text>
           </View>
         </View>
 
         {/* Mô tả ngân hàng */}
-        <View style={[confirmStyles.valueContainer, { top: by(POS.bankSub.top), right: 35, left: 35 }]}>
+        <View style={[confirmStyles.valueContainer, { top: by(POS.bankSub.top), right: 32, left: 35 }]}>
           <Text style={[confirmStyles.value, { fontSize: 12.1, color: '#1f1f1f', fontFamily: FONT_MEDIUM }]}>{details.bank.sub}</Text>
         </View>
 
         {/* Nội dung chuyển */}
-        <View
-          style={[
-            confirmStyles.valueContainer,
-            {
-              position: 'absolute',
-              top: by(POS.note.top),
-              right: 20,          // 👈 neo mép phải cố định
-              left: undefined,    // 👈 bỏ neo trái để không bị kẹp
-              maxWidth: VALUE_COL_MAX, // 👈 bề ngang tối đa, sẽ wrap muộn hơn
-              alignSelf: 'flex-end',
-            },
-          ]}
-        >
-          <Text
-            style={[confirmStyles.value, { textAlign: 'right', fontFamily: FONT_HEAVY }]}
-            numberOfLines={3}            // cho phép 2–3 dòng (tùy bạn)
-            adjustsFontSizeToFit={false} // không auto nhỏ chữ (giữ vẻ giống real)
-          >
+        <View style={[confirmStyles.valueContainer, { top: by(POS.note.top), right: 32, left: 35 }]}>
+          <Text style={[confirmStyles.value, { textAlign: 'right', fontFamily: FONT_BOLD }]}>
             {formatNote(details.note)}
           </Text>
         </View>
+        
+        {/* Hình thức chuyển */}
+        <View style={[confirmStyles.valueContainer, { top: by(POS.method.top), right: 32, left: 35 }]}>
+          <Text style={[confirmStyles.value, { textAlign: POS.method.align, fontFamily: FONT_BOLD }]}>{'Chuyển tiền nhanh\n24/7'}</Text>
+        </View>
 
         {/* Phí */}
-        <View style={[confirmStyles.valueContainer, { top: by(POS.fee.top), right: 35, left: 35 }]}>
-          <Text style={[confirmStyles.value, { fontFamily: FONT_HEAVY }]}>{details.fee === 0 ? 'Miễn phí' : `${formatVNCurrency(details.fee)} VND`}</Text>
+        <View style={[confirmStyles.valueContainer, { top: by(POS.fee.top), right: 32, left: 35 }]}>
+          <Text style={[confirmStyles.value, { fontFamily: FONT_BOLD }]}>{details.fee === 0 ? 'Miễn phí' : `${formatVNCurrency(details.fee)} VND`}</Text>
         </View>
 
         {/* Mã giao dịch */}
-        <View style={[confirmStyles.valueContainer, { top: by(POS.transId.top), right: 35, left: 35 }]}>
-          <Text style={[confirmStyles.value, { textAlign: 'right' }]}><Text style={{ fontFamily: FONT_HEAVY }}>{transactionId}</Text></Text>
+        <View style={[confirmStyles.valueContainer, { top: by(POS.transId.top), right: 32, left: 35 }]}>
+          <Text style={[confirmStyles.value, { textAlign: 'right' }]}><Text style={{ fontFamily: FONT_BOLD }}>{transactionId}</Text></Text>
         </View>
       </ImageBackground>
 </ScrollView>
@@ -1701,7 +1496,7 @@ const successStyles = StyleSheet.create({
     saveTemplateContainer: {
         width: '100%',
         paddingHorizontal: 40,
-        height: 48, 
+        height: 48,
         marginTop: 8,
     },
 });
@@ -1908,13 +1703,7 @@ phoneInput: {
     height: 48,
     borderRadius: 15,
     alignItems: 'center',
+    justifyContent: 'center',
     flexDirection: 'row',
   },
-});
-
-const modalNotiStyles = StyleSheet.create({
-  backdrop: { flex: 1, backgroundColor: 'rgba(0,0,0,0.45)', alignItems: 'center', justifyContent: 'center' },
-  sheet: { width: '86%', backgroundColor: '#fff', borderRadius: 16, padding: 20, alignItems: 'center' },
-  message: { fontSize: 15, color: '#333', textAlign: 'center', lineHeight: 22, marginBottom: 20, fontFamily: FONT_REG },
-  btn: { backgroundColor: '#009245', paddingHorizontal: 36, paddingVertical: 12, borderRadius: 8 },
 });

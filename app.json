@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "8e80ca18-03a2-48d4-b539-f758e8b32a15"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "com.taof.taofvcbdemo",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    }
+  }
+}
